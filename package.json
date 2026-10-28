@@ -1,0 +1,16 @@
+{
+  "name": "tablero-tareas-grupo3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proyecto final Grupo 3 - Tablero de tareas con Cypress",
+  "scripts": {
+    "start": "http-server public -p 3000 -c-1",
+    "test:e2e": "cypress run --browser electron",
+    "test:open": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^13.17.0",
+    "http-server": "^14.1.1",
+    "mochawesome": "^7.1.3"
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "titulo": "Preparar informe",
+    "estado": "Pendiente"
+  },
+  {
+    "titulo": "Revisar pruebas",
+    "estado": "En progreso"
+  },
+  {
+    "titulo": "Entregar proyecto",
+    "estado": "Hecha"
+  }
+]
