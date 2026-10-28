@@ -1,16 +1,45 @@
+
 name: Pruebas Cypress
+
 on: [push, pull_request]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+
     steps:
       - name: Descargar codigo
         uses: actions/checkout@v4
-      - name: Ejecutar Cypress
-        uses: cypress-io/github-action@v6
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          start: npm start
-          wait-on: http://localhost:3000
+          node-version: '22'
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar Cypress
+        run: |
+          npm start > servidor.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+
+          for intento in {1..30}; do
+            if curl --noproxy "*" -fsS http://127.0.0.1:3000/ > /dev/null; then
+              break
+            fi
+            sleep 2
+          done
+
+          curl --noproxy "*" -fsS http://127.0.0.1:3000/ > /dev/null || {
+            cat servidor.log
+            exit 1
+          }
+
+          npx cypress run --browser electron
+
       - name: Subir evidencia de Cypress
         if: always()
         uses: actions/upload-artifact@v4
