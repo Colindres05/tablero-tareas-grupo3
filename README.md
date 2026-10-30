@@ -1,48 +1,107 @@
+
 # Tablero de Tareas — Grupo 3 (UMG)
 
-![Pruebas Cypress](https://github.com/USUARIO/REPOSITORIO/actions/workflows/cypress.yml/badge.svg)
+![Pruebas Cypress](https://github.com/Colindres05/tablero-tareas-grupo3/actions/workflows/cypress.yml/badge.svg)
 
-Aplicación web académica con HTML, CSS y JavaScript. Usuario de demostración: `admin` / `admin123`. Usa `localStorage` para tareas y sesión (solo para la práctica, **no** apto para producción).
+Proyecto final de Aseguramiento de la Calidad de Software de la Universidad Mariano Gálvez.
 
-## Ejecutar
+Aplicación web desarrollada con HTML, CSS y JavaScript que permite gestionar tareas y verificar su funcionamiento mediante Cypress y GitHub Actions.
+
+## Credenciales de acceso
+
+- Usuario: `admin`
+- Contraseña: `admin123`
+
+La aplicación utiliza `localStorage` para almacenar tareas y sesión. Las credenciales son únicamente para demostración académica.
+
+## Instalación y ejecución
+
+Instalar las dependencias:
 
 ```powershell
 npm.cmd install
+```
+
+Iniciar el servidor:
+
+```powershell
 npm.cmd start
 ```
 
-Abre http://localhost:3000. En otra terminal:
+Abrir la aplicación en:
+
+http://localhost:3000
+
+## Ejecutar las pruebas Cypress
+
+En una segunda terminal:
 
 ```powershell
 npx.cmd cypress run --browser electron
 ```
 
-## Funciones
+## Funcionalidades
 
-- Login correcto e incorrecto.
-- Crear tareas y validar título obligatorio.
-- Estados: Pendiente, En progreso, Hecha.
-- Filtrar por estado; **todos los contadores reflejan solo las tareas visibles**.
-- Cambiar estados y eliminar tareas.
-- Datos persistentes en localStorage.
+- Inicio de sesión correcto e incorrecto.
+- Creación de tareas.
+- Validación de título obligatorio.
+- Estados: Pendiente, En progreso y Hecha.
+- Cambio de estado de las tareas.
+- Filtros por estado.
+- Contadores correspondientes a las tareas visibles.
+- Eliminación de tareas.
+- Persistencia de datos mediante localStorage.
 
-## Pruebas y temas investigados
+## Pruebas automatizadas
 
-- `cypress/e2e/tablero.cy.js`: pruebas de login, creación, cambios, filtros, validación y eliminación.
-- `cypress/fixtures/casos-tareas.json`: pruebas guiadas por datos con `forEach`.
-- `cypress/support/commands.js`: comandos personalizados y sesión reutilizable con `cy.session`.
-- Mochawesome genera reportes HTML/JSON en `cypress/reports`.
-- GitHub Actions corre en `push` y `pull_request`, sube videos, capturas y reportes.
-- Actualiza `USUARIO/REPOSITORIO` en el badge una vez creado el repositorio.
+- `cypress/e2e/tablero.cy.js`: verifica el login, la creación de tareas, cambios de estado, filtros, validaciones y eliminación.
+- `cypress/e2e/persistencia.cy.js`: verifica que las tareas y la sesión se conserven después de recargar la página.
+- `cypress/fixtures/casos-tareas.json`: contiene los datos utilizados en pruebas guiadas por datos mediante `forEach`.
+- `cypress/support/commands.js`: contiene comandos personalizados de Cypress.
 
-## Equipo
+Actualmente se cuenta con 9 pruebas automatizadas aprobadas.
 
-| Integrante | Función | Nombre / usuario GitHub |
+## Tema investigado 1: Comandos personalizados y caché de sesión
+
+Se implementaron comandos personalizados utilizando `Cypress.Commands.add()` para reutilizar acciones frecuentes.
+
+También se utiliza `cy.session()` para conservar y reutilizar la sesión de autenticación durante las pruebas, evitando repetir innecesariamente el proceso de login.
+
+La implementación se encuentra en:
+
+`cypress/support/commands.js`
+
+## Tema investigado 2: Reportes y estado de pruebas
+
+Se utiliza Mochawesome para generar reportes de los resultados de Cypress.
+
+Los reportes se guardan en:
+
+`cypress/reports`
+
+GitHub Actions ejecuta las pruebas automáticamente cuando se realizan operaciones `push` o `pull_request`.
+
+Los videos, capturas y reportes se almacenan como artefactos de las ejecuciones.
+
+El indicador ubicado al inicio del README muestra el estado del flujo de GitHub Actions.
+
+## Integrantes y responsabilidades
+
+| Integrante | Responsabilidad | GitHub |
 |---|---|---|
-| 1 | Interfaz y lógica | Por completar |
-| 2 | Cypress y fixtures | Por completar |
-| 3 | CI, reportes y documentación | Por completar |
+| Integrante 1 | Desarrollo principal y coordinación | Colindres05 |
+| Integrante 2 | Pruebas Cypress y persistencia | Cindy18-5 |
+| Integrante 3 | Documentación y reportes | Por completar |
 
-## Exposición y entrega
+## Evidencias
 
-Se requieren al menos dos Pull Requests con revisiones y merges, una ejecución verde y otra roja con evidencias, informe UMG y una modificación en vivo. Ver `docs/PLAN-GRUPO3.md`.
+Las ejecuciones y los artefactos de Cypress pueden consultarse en:
+
+https://github.com/Colindres05/tablero-tareas-grupo3/actions
+
+## Entrega final
+
+El proyecto incluye una aplicación funcional, pruebas automatizadas, GitHub Actions, participación mediante Pull Requests y documentación académica.
+
+La exposición contempla la demostración de ejecuciones aprobadas y fallidas, además de una modificación sencilla realizada en vivo.
+
