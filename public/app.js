@@ -47,7 +47,7 @@ function agregarTarea(evento) {
   const titulo = document.getElementById("titulo").value.trim();
   const estado = document.getElementById("estado").value;
   const mensaje = document.getElementById("form-msg");
-  //if (!titulo) { mensaje.textContent = "El título de la tarea es obligatorio."; return; }
+  if (!titulo) { mensaje.textContent = "El título de la tarea es obligatorio."; return; }
   if (!ESTADOS.includes(estado)) { mensaje.textContent = "El estado seleccionado no es válido."; return; }
   tareas.push({ id: `${Date.now()}-${Math.random().toString(36).slice(2)}`, titulo, estado });
   guardarTareas(); mensaje.textContent = "";
